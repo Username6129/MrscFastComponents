@@ -102,6 +102,7 @@ setup(
     description = "Fast Multi-Robot Sorting Centers Components for Prototyping.",
     ext_modules = ext_modules,
     license='MIT',
+    url='https://github.com/Username6129/MrscFastComponents',
     author="Chee-Henn Chng",
     setup_requires=['pybind11>=2.5.0'],
     author_email="cheehennchng@gmail.com",
