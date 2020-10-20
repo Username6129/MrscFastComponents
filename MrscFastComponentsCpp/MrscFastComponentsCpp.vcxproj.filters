@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Algorithms.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyDebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Workspace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PyInterfaceEdge.cpp">
+      <Filter>Source Files\PyInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="PyInterfaceGraph.cpp">
+      <Filter>Source Files\PyInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="PyInterfaceMain.cpp">
+      <Filter>Source Files\PyInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="PyInterfaceVector2d.cpp">
+      <Filter>Source Files\PyInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="PyInterfaceVertex.cpp">
+      <Filter>Source Files\PyInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="PyInterfaceWorkspace.cpp">
+      <Filter>Source Files\PyInterface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Algorithms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Workspace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PyInterfaceEdge.h">
+      <Filter>Header Files\PyInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="PyInterfaceGraph.h">
+      <Filter>Header Files\PyInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="PyInterfaceVector2d.h">
+      <Filter>Header Files\PyInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="PyInterfaceVertex.h">
+      <Filter>Header Files\PyInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="PyInterfaceWorkspace.h">
+      <Filter>Header Files\PyInterface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="setup.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2374af95-c9b4-42e1-b71d-37c5489d9137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{aaebc4c3-c7ba-4f4e-9ea8-680ca0ecfb33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PyInterface">
+      <UniqueIdentifier>{c6e9fa16-c28d-484c-af92-3870c3313971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PyInterface">
+      <UniqueIdentifier>{932e1a86-dc27-4c43-898e-af986b4e047b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
