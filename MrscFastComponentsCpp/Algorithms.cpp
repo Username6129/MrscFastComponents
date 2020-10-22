@@ -47,10 +47,10 @@ int path_node_pointer = 0;
 void inline reset_node(PathNodeNaive* n, const Vertex& v, PathNodeNaive* prev_node, double&& total_cost) {
 	n->prev_node = prev_node;
 	n->total_cost = std::move(total_cost);
+	n->edge.endPointY = v;
 
 	if (prev_node != nullptr) {
 		n->edge.endPointX = prev_node->edge.endPointY;
-		n->edge.endPointY = v;
 	}
 }
 

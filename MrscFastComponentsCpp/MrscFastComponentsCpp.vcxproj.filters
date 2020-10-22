@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="setup.py" />
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\LICENSE.txt" />
