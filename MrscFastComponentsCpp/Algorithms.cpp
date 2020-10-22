@@ -19,17 +19,6 @@ Path extract_path(const PathNodeNaive& path_node)
 
 PathNodeNaive::PathNodeNaive() {}
 
-PathNodeNaive::PathNodeNaive(const Vertex& v, PathNodeNaive* prev_node, double total_cost)
-{
-	this->prev_node = prev_node;
-	this->total_cost = total_cost;
-
-	if (prev_node != nullptr) {
-		this->edge.endPointX = prev_node->edge.endPointY;
-		this->edge.endPointY = v;
-	}
-}
-
 bool PathNodeNaive::operator<(const PathNodeNaive& p)
 {
 
