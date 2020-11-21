@@ -40,6 +40,9 @@
     <ClCompile Include="PyInterfaceWorkspace.cpp">
       <Filter>Source Files\PyInterface</Filter>
     </ClCompile>
+    <ClCompile Include="PyInterfaceAlgorithms.cpp">
+      <Filter>Source Files\PyInterface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithms.h">
@@ -73,6 +76,9 @@
       <Filter>Header Files\PyInterface</Filter>
     </ClInclude>
     <ClInclude Include="PyInterfaceWorkspace.h">
+      <Filter>Header Files\PyInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="PyInterfaceAlgorithms.h">
       <Filter>Header Files\PyInterface</Filter>
     </ClInclude>
   </ItemGroup>

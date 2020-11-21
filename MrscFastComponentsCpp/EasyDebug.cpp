@@ -10,7 +10,7 @@
 int main()
 {
 
-    Workspace w = Workspace(300, 300, 1);
+    Workspace w = Workspace(75, 75, 1);
     set<Vertex> vends;
     unordered_map<Edge, double, Edge::HashFunction> cost(w.graph.edges.size());
 
@@ -21,18 +21,18 @@ int main()
 
     auto init_direction = Vector2d(0, 1);
     auto vstart = w[Vector2d(0, 0)];
-    vends.insert(w[Vector2d(299, 299)]);
+    vends.insert(w[Vector2d(74, 74)]);
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-    auto res = get_path_GBRS_naive(w, init_direction, vstart, vends, cost, 1);
+    auto res = get_path_gbrs(w, init_direction, vstart, vends, cost, 1);
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-    //for (auto v : res) {
-    //    cout << w[v.endPointX].to_string() << endl;
-    //}
-    //cout << w[res.back().endPointY].to_string() << endl;
+    for (auto v : res.path) {
+        cout << w[v.endPointX].to_string() << endl;
+    }
+    cout << w[res.path.back().endPointY].to_string() << endl;
 
     std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
     

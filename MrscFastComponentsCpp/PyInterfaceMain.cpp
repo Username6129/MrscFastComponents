@@ -7,8 +7,11 @@
 #include "PyInterfaceEdge.h"
 #include "PyInterfaceVertex.h"
 #include "PyInterfaceGraph.h"
+#include "PyInterfaceAlgorithms.h"
 #include "pybind11/stl_bind.h"
 #include "PyInterfaceWorkspace.h"
+#include <pybind11/stl_bind.h>
+#include "Algorithms.h"
 
 namespace py = pybind11;
 using namespace pybind11::literals;
@@ -20,10 +23,12 @@ PYBIND11_MODULE(mrscfastcom, m) {
 
     m.doc() = "Fast Multi-Robot Sorting Centers Components for Prototyping.";
     py::module m1 = m.def_submodule("workspace", "Workspace - The Lowest-Level Environmental Layout.");
+    py::module m2 = m.def_submodule("algorithms", "Fast Algorithms Collection.");
 
     bindVector2d(m1);
     bindVertex(m1);
     bindEdge(m1); 
     bindGraph(m1);
     bindWorkspace(m1);
+    bindAlgorithms(m2);
 }

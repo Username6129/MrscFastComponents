@@ -1,3 +1,12 @@
+Algorithms
+=====================================
+
+.. autoclass:: mrscfastcom.algorithms.PathInfo
+   :special-members:
+   :members:
+
+.. autofunction:: mrscfastcom.algorithms.get_path_gbrs
+
 Workspace
 =====================================
 

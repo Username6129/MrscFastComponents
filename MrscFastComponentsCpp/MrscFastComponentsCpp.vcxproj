@@ -22,6 +22,7 @@
     <ClInclude Include="Algorithms.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="PyInterfaceAlgorithms.h" />
     <ClInclude Include="PyInterfaceEdge.h" />
     <ClInclude Include="PyInterfaceGraph.h" />
     <ClInclude Include="PyInterfaceVector2d.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="EasyDebug.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="PyInterfaceAlgorithms.cpp" />
     <ClCompile Include="PyInterfaceEdge.cpp" />
     <ClCompile Include="PyInterfaceGraph.cpp" />
     <ClCompile Include="PyInterfaceMain.cpp" />
@@ -138,7 +140,7 @@
     <DebuggerFlavor>$(DefaultDebuggerFlavor)</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <TargetName>Multi_Robot_Sorting_Center_4_1</TargetName>
+    <TargetName>MrscFastComponents</TargetName>
     <TargetExt>.pyd</TargetExt>
     <LocalDebuggerCommand>$(PythonExe)</LocalDebuggerCommand>
     <LocalDebuggerCommandArguments>-i -c "print('&gt;&gt;&gt; import Multi_Robot_Sorting_Center_4_1'); import Multi_Robot_Sorting_Center_4_1"</LocalDebuggerCommandArguments>
