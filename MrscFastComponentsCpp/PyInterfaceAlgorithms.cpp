@@ -30,11 +30,36 @@ void bindAlgorithms(py::module& m) {
             :param vs: Initiate vertex.
             :type vs: Vertex
             :param ends: A set of available goal vertices or edges.
-            :type ends: Set[Vertex, Edges]
+            :type ends: Set[Vertex, Edge]
             :param cost: Cost function for each edges.
             :type cost: Dict[Edge]
             :param rotation_penalty: Rotation penalty.
             :type rotation_penalty: float
+            :rtype: PathInfo
+
+            :Example:
+            
+            >>> from mrscfastcom.workspace import *
+            >>> from mrscfastcom.algorithms import *
+
+            >>> w = Workspace(75, 75, 0.6)
+            >>> init_direction = Vector2d(0, 1)
+            >>> vs = w[0, 0]
+            >>> ends = {Edge(w[11, 12], w[12, 12])}
+            >>> cost = {e: 1 for e in w.graph.edges}
+            >>> p = get_path_gbrs(w, init_direction, vs, ends, cost, 1)
+
+            >>> p.cost
+            25.5707963267949
+            
+            >>> (w[p.path[0].endPointX], w[p.path[0].endPointY])
+            (<Vector2d: 0.000000, 0.000000>, <Vector2d: 0.000000, 1.000000>)
+
+            >>> (w[p.path[-1].endPointX], w[p.path[-1].endPointY])
+            (<Vector2d: 11.000000, 12.000000>, <Vector2d: 12.000000, 12.000000>)
+
+            >>> len(p.path)
+            24
 
         )delimiter", "workspace"_a, "init_direction"_a, "vs"_a, "ends"_a, "cost"_a, "rotation_penalty"_a);
 
