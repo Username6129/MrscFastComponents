@@ -1,3 +1,4 @@
+#pragma once
 #include "Vertex.h"
 #include "Vector2d.h"
 #include "Workspace.h"
@@ -8,12 +9,16 @@
 
 typedef vector<Edge> Path;
 
+struct PathInfo {
+	PathInfo() : cost(0) {}
+	Path path;
+	double cost;
+};
+
 struct PathNodeNaive {
 	PathNodeNaive* prev_node;
 	double total_cost;
 	Edge edge;
-	PathNodeNaive();
-	PathNodeNaive(const Vertex& v, PathNodeNaive* prev_node, double total_cost);
 	bool operator < (const PathNodeNaive& p);
 };
 
@@ -21,13 +26,22 @@ struct CmpPathNodeNaivePtr {
 	bool operator()(const PathNodeNaive* lhs, const PathNodeNaive* rhs) const;
 };
 
-Path extract_path(const PathNodeNaive& path_node);
+PathInfo extract_path(const PathNodeNaive& path_node);
 
-Path get_path_GBRS_naive(
+PathInfo get_path_gbrs(
 	Workspace& workspace,
 	Vector2d& direction,
-	Vertex& vstart,
-	set<Vertex>& vends,
+	Vertex& start,
+	set<Vertex>& ends,
+	unordered_map<Edge, double, Edge::HashFunction>& w,
+	double rotate_penalty
+);
+
+PathInfo get_path_gbrs(
+	Workspace& workspace,
+	Vector2d& direction,
+	Vertex& start,
+	set<Edge>& ends,
 	unordered_map<Edge, double, Edge::HashFunction>& w,
 	double rotate_penalty
 );

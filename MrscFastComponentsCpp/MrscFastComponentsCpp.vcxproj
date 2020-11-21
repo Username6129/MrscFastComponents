@@ -22,6 +22,7 @@
     <ClInclude Include="Algorithms.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="PyInterfaceAlgorithms.h" />
     <ClInclude Include="PyInterfaceEdge.h" />
     <ClInclude Include="PyInterfaceGraph.h" />
     <ClInclude Include="PyInterfaceVector2d.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="EasyDebug.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="PyInterfaceAlgorithms.cpp" />
     <ClCompile Include="PyInterfaceEdge.cpp" />
     <ClCompile Include="PyInterfaceGraph.cpp" />
     <ClCompile Include="PyInterfaceMain.cpp" />
