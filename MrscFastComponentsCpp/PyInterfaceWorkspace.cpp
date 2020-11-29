@@ -11,6 +11,8 @@ void bindWorkspace(py::module& m) {
         :type graph: Graph
         :var grid_length: The length of the grids in the workspace. Assume all the grids are square.
         :type grid_length: double
+        :var M: The number of grids of each row.
+        :var N: The number of grids of each column.
 
     )delimiter")
 
@@ -41,6 +43,8 @@ void bindWorkspace(py::module& m) {
         
     )delimiter", "n"_a, "m"_a, "l"_a)
 
+        .def_readonly("M", &Workspace::M)
+        .def_readonly("N", &Workspace::N)
         .def_readwrite("grid_length", &Workspace::grid_length)
         .def("set_mapping", py::overload_cast<const Vector2d&, const Vertex&>(&Workspace::set_mapping), R"delimiter(
 
@@ -95,6 +99,8 @@ void bindWorkspace(py::module& m) {
     )delimiter")
 
         .def_readonly("graph", &Workspace::graph)
+        .def_readonly("M", &Workspace::M)
+        .def_readonly("N", &Workspace::N)
         .def("__getitem__", py::overload_cast<const Vector2d&>(&Workspace::operator[]), R"delimiter(
 
         This operator received Vertex, Vector2d, or 2d-tuple instance as input. 

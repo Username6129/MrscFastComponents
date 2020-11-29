@@ -13,6 +13,8 @@ struct PathInfo {
 	PathInfo() : cost(0) {}
 	Path path;
 	double cost;
+
+	vector<Vertex> get_vertex_sequence();
 };
 
 struct PathNodeNaive {

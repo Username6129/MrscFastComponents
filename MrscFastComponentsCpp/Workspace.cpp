@@ -8,6 +8,8 @@ Workspace::Workspace(int m, int n, double l)
 	this->grid_length = l;
 	Vertex v;
 	Vector2d c;
+	this->M = m;
+	this->N = n;
 
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < n; j++) {

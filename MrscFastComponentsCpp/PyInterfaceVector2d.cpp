@@ -155,6 +155,7 @@ void bindVector2d(py::module& m) {
             <Vector2d: -1.000000, 2.000000>
 
         )delimiter", "rhs"_a)
-
-        .def("__repr__", &Vector2d::to_string);
+        .def("to_tuple", &Vector2d::to_tuple)
+        .def("__repr__", &Vector2d::to_string)
+        .def("__hash__", &Vector2d::get_hash);
 }

@@ -71,6 +71,17 @@ double Vector2d::getAngleDf(const Vector2d& v) const
 	return acos(u.x * w.x + u.y * w.y);
 }
 
+std::size_t Vector2d::get_hash()
+{
+	// Cantor pairing
+	return ((x + 1 + y + 1) * (x + 1 + y + 2)) / 2 + y + 1;
+}
+
+pair<double, double> Vector2d::to_tuple() const
+{
+	return pair<float, float>(this->x, this->y);
+}
+
 //double Vector2d::getAngleDf(const Vector2d&& v) const
 //{
 //	auto u = this->getUnitVector();

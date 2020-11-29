@@ -7,9 +7,9 @@ void bindEdge(py::module& m) {
         A class with two vertices (endPointX and endPointY). This is to represent directed edge.
 
         :var endPointX: First endpoint. 
-        :type endPointX: Vector2d
+        :type endPointX: Vertex
         :var endPointY: Second endpoint.
-        :type endPointY: Vector2d
+        :type endPointY: Vertex
 
     )delimiter")
 

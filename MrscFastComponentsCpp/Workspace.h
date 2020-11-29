@@ -11,10 +11,12 @@ struct Workspace {
 //private:
 	unordered_map<Vertex, Vector2d, Vertex::HashFunction> z;
 	map<Vector2d, Vertex> z_inv;
+	int M;
+	int N;
 
 //public:
 	Graph graph;
-	double grid_length;	
+	double grid_length;
 
 	Workspace(int m, int n, double l);
 	Workspace();

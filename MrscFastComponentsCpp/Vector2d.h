@@ -21,6 +21,8 @@ struct Vector2d {
 	string to_string() const;
 	Vector2d getUnitVector() const;
 	double getAngleDf(const Vector2d& v) const;
+	std::size_t get_hash();
+	pair<double, double> to_tuple() const;
 };
 
 // For Optimization Purpose

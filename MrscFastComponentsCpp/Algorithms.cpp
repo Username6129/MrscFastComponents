@@ -94,7 +94,7 @@ PathInfo get_path_gbrs(
 			return extract_path(*n);
 		}
 
-		succ = &(z.graph.left_vertex_incident_edges.find(n->edge.endPointY)->second);
+		succ = &(z.graph.edges_start_with.find(n->edge.endPointY)->second);
 		for (it = succ->begin(); it != succ->end(); it++) {
 
 			e_next = &(*it);
@@ -158,7 +158,7 @@ PathInfo get_path_gbrs(
 			return extract_path(*n);
 		}
 
-		succ = &(z.graph.left_vertex_incident_edges.find(n->edge.endPointY)->second);
+		succ = &(z.graph.edges_start_with.find(n->edge.endPointY)->second);
 		for (it = succ->begin(); it != succ->end(); it++) {
 
 			e_next = &(*it);
@@ -176,4 +176,15 @@ PathInfo get_path_gbrs(
 		}
 	}
 	return PathInfo();
+}
+
+vector<Vertex> PathInfo::get_vertex_sequence()
+{
+	vector<Vertex> res;
+	for (auto e : path) {
+		res.push_back(e.endPointX);
+	}
+
+	path[path.size()].endPointY;
+	return res;
 }

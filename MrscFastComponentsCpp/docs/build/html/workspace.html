@@ -48,6 +48,7 @@ This class is used to return the result of path planning algorithms.</p>
 <dt class="field-odd">Variables</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> – A list of edges.</p></li>
+<li><p><strong>vertex_sequence</strong> – Vertex sequence of the solution.</p></li>
 <li><p><strong>cost</strong> – The total cost of the path.</p></li>
 </ul>
 </dd>
@@ -117,6 +118,8 @@ This class is used to return the result of path planning algorithms.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>graph</strong> – A Graph instance.</p></li>
 <li><p><strong>grid_length</strong> – The length of the grids in the workspace. Assume all the grids are square.</p></li>
+<li><p><strong>M</strong> – The number of grids of each row.</p></li>
+<li><p><strong>N</strong> – The number of grids of each column.</p></li>
 </ul>
 </dd>
 </dl>
@@ -389,7 +392,7 @@ Check if a given input in the graph instance.</p>
 <dd><p>This function is to get the direct successors of the input vertex.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#mrscfastcom.workspace.Edge" title="mrscfastcom.workspace.Edge"><em>Edge</em></a><em>, </em><a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex"><em>Vertex</em></a><em>]</em>) – An instance of Vertex.</p>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex"><em>Vertex</em></a>) – An instance of Vertex.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A set of successors.</p>
@@ -429,6 +432,219 @@ Check if a given input in the graph instance.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="mrscfastcom.workspace.Graph.get_edges_end_with">
+<code class="sig-name descname">get_edges_end_with</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mrscfastcom.workspace.Graph.get_edges_end_with" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return all the edges end with vertex v.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex"><em>Vertex</em></a>) – An instance of Vertex.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A set of edges that end with vertex v.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Set[<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex">Vertex</a>]</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">e2</span><span class="p">}</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">get_edges_end_with</span><span class="p">(</span><span class="n">v3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mrscfastcom.workspace.Graph.get_edges_start_with">
+<code class="sig-name descname">get_edges_start_with</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mrscfastcom.workspace.Graph.get_edges_start_with" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return all the edges start with vertex v.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex"><em>Vertex</em></a>) – An instance of Vertex.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A set of edges that start with vertex v.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Set[<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex">Vertex</a>]</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">e3</span><span class="p">}</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">get_edges_start_with</span><span class="p">(</span><span class="n">v3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mrscfastcom.workspace.Graph.get_edges_with">
+<code class="sig-name descname">get_edges_with</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mrscfastcom.workspace.Graph.get_edges_with" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return all the edges that contain vertex v.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex"><em>Vertex</em></a>) – An instance of Vertex.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A set of edges that contain vertex v.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Set[<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex">Vertex</a>]</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">e1</span><span class="p">,</span> <span class="n">e3</span><span class="p">}</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">get_edges_with</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">e2</span><span class="p">,</span> <span class="n">e3</span><span class="p">}</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">get_edges_with</span><span class="p">(</span><span class="n">v3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mrscfastcom.workspace.Graph.get_in_degree">
+<code class="sig-name descname">get_in_degree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mrscfastcom.workspace.Graph.get_in_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is to get the in degree of vertex v.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex"><em>Vertex</em></a>) – An instance of Vertex.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>In degree of vertex v.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">get_in_degree</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">get_in_degree</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">get_in_degree</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mrscfastcom.workspace.Graph.get_out_degree">
+<code class="sig-name descname">get_out_degree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mrscfastcom.workspace.Graph.get_out_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is to get the out degree of vertex v.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex"><em>Vertex</em></a>) – An instance of Vertex.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Out degree of the vertex v.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">get_out_degree</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">get_out_degree</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">get_out_degree</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt id="mrscfastcom.workspace.Graph.insert">
 <code class="sig-name descname">insert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mrscfastcom.workspace.Graph.insert" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function receives Vertex or Edge as input. The provided input will be added to the corresponding set.</p>
@@ -458,6 +674,49 @@ Check if a given input in the graph instance.</p>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">edges</span>
 <span class="go">{&lt;Edge: 1, 2&gt;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mrscfastcom.workspace.Graph.is_cycle_exist">
+<code class="sig-name descname">is_cycle_exist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mrscfastcom.workspace.Graph.is_cycle_exist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if any cycle exists in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root</strong> (<a class="reference internal" href="#mrscfastcom.workspace.Vertex" title="mrscfastcom.workspace.Vertex"><em>Vertex</em></a>) – The algorithm only searches the subgraph that connected to root.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if at least one cycle exists, false otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">Vertex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e3</span> <span class="o">=</span> <span class="n">Edge</span><span class="p">(</span><span class="n">v3</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">is_cycle_exist</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">is_cycle_exist</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">is_cycle_exist</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>

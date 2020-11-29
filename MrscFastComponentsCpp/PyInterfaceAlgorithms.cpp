@@ -9,11 +9,13 @@ void bindAlgorithms(py::module& m) {
 
         :var path: A list of edges. 
         :type path: List[Edge]
+        :var vertex_sequence: Vertex sequence of the solution.
         :var cost: The total cost of the path.
         :type cost: double 
-
+        
     )delimiter")
         .def(py::init<>())
+        .def_property_readonly("vertex_sequence", &PathInfo::get_vertex_sequence)
         .def_readonly("path", &PathInfo::path)
         .def_readonly("cost", &PathInfo::cost);
 

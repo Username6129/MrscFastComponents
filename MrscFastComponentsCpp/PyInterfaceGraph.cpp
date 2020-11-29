@@ -149,11 +149,134 @@ void bindGraph(py::module& m) {
             {<Vertex: 1>}
 
         )delimiter")
+
+        .def("get_edges_start_with", &Graph::get_edges_start_with, R"delimiter(
+
+            This function return all the edges start with vertex v.
+            
+            :param v: An instance of Vertex.
+            :type v: Vertex
+            :return: A set of edges that start with vertex v.
+            :rtype: Set[Vertex]
+
+            :Example:
+            
+            >>> v1 = Vertex(1)
+            >>> v2 = Vertex(2)
+            >>> v3 = Vertex(3)
+            >>> e1 = Edge(v1, v2)
+            >>> e2 = Edge(v1, v3)
+            >>> e3 = Edge(v3, v2)
+
+            >>> g = Graph()
+            >>> g.insert(e1)
+            >>> g.insert(e2)
+            >>> g.insert(e3)
+
+            >>> {e3} == g.get_edges_start_with(v3)
+            True
+
+        )delimiter")
+
+        .def("get_edges_end_with", &Graph::get_edges_end_with, R"delimiter(
+
+            This function return all the edges end with vertex v.
+            
+            :param v: An instance of Vertex.
+            :type v: Vertex
+            :return: A set of edges that end with vertex v.
+            :rtype: Set[Vertex]
+
+            :Example:
+            
+            >>> v1 = Vertex(1)
+            >>> v2 = Vertex(2)
+            >>> v3 = Vertex(3)
+            >>> e1 = Edge(v1, v2)
+            >>> e2 = Edge(v1, v3)
+            >>> e3 = Edge(v3, v2)
+
+            >>> g = Graph()
+            >>> g.insert(e1)
+            >>> g.insert(e2)
+            >>> g.insert(e3)
+
+            >>> {e2} == g.get_edges_end_with(v3)
+            True
+
+        )delimiter")
+
+        .def("get_edges_with", &Graph::get_edges_with, R"delimiter(
+
+            This function return all the edges that contain vertex v.
+            
+            :param v: An instance of Vertex.
+            :type v: Vertex
+            :return: A set of edges that contain vertex v.
+            :rtype: Set[Vertex]
+
+            :Example:
+            
+            >>> v1 = Vertex(1)
+            >>> v2 = Vertex(2)
+            >>> v3 = Vertex(3)
+            >>> e1 = Edge(v1, v2)
+            >>> e2 = Edge(v1, v3)
+            >>> e3 = Edge(v3, v2)
+
+            >>> g = Graph()
+            >>> g.insert(e1)
+            >>> g.insert(e2)
+            >>> g.insert(e3)
+
+            >>> {e1, e3} == g.get_edges_with(v2)
+            True
+
+            >>> {e2, e3} == g.get_edges_with(v3)
+            True
+
+        )delimiter")
+    
+        
+        .def("is_cycle_exist", &Graph::is_cycle_exist, R"delimiter(
+
+            Check if any cycle exists in the graph.
+            
+            :param root: The algorithm only searches the subgraph that connected to root.
+            :type root: Vertex
+            :return: True if at least one cycle exists, false otherwise.
+            :rtype: bool
+
+            :Example:
+            
+            >>> v1 = Vertex(1)
+            >>> v2 = Vertex(2)
+            >>> v3 = Vertex(3)
+            >>> e1 = Edge(v1, v2)
+            >>> e2 = Edge(v2, v3)
+            >>> e3 = Edge(v3, v1)
+
+            >>> g = Graph()
+            >>> g.insert(e1)
+            >>> g.is_cycle_exist(v1)
+            False
+
+            >>> g.insert(e2)
+            >>> g.is_cycle_exist(v1)
+            False
+
+            >>> g.insert(e3)
+            >>> g.is_cycle_exist(v1)
+            True
+
+        )delimiter", "root"_a)
+    
         .def("get_dt_successors", &Graph::get_dt_successors, R"delimiter(
+
             This function is to get the direct successors of the input vertex.
             
             :param v: An instance of Vertex.
-            :type v: Union[Edge, Vertex]
+            :type v: Vertex
             :return: A set of successors.
             :rtype: Set[Vertex]
 
@@ -179,6 +302,80 @@ void bindGraph(py::module& m) {
 
             >>> g.get_dt_successors(v3)
             {<Vertex: 2>}
+
+        )delimiter")
+
+        .def("get_in_degree", &Graph::get_in_degree, R"delimiter(
+
+            This function is to get the in degree of vertex v.
+            
+            :param v: An instance of Vertex.
+            :type v: Vertex
+            :return: In degree of vertex v.
+            :rtype: int
+
+            :Example:
+            
+            >>> v1 = Vertex(1)
+            >>> v2 = Vertex(2)
+            >>> v3 = Vertex(3)
+
+            >>> e1 = Edge(v1, v2)
+            >>> e2 = Edge(v1, v3)
+            >>> e3 = Edge(v3, v2)
+
+            >>> g = Graph()
+            >>> g.insert(e1)
+            >>> g.insert(e2)
+            >>> g.insert(e3)
+
+            >>> g.get_in_degree(v2)
+            2
+            
+            >>> g.remove(e3)
+            >>> g.get_in_degree(v2)
+            1
+
+            >>> g.remove(e1)
+            >>> g.get_in_degree(v1)
+            0
+
+        )delimiter")
+
+        .def("get_out_degree", &Graph::get_out_degree, R"delimiter(
+
+            This function is to get the out degree of vertex v.
+            
+            :param v: An instance of Vertex.
+            :type v: Vertex
+            :return: Out degree of the vertex v.
+            :rtype: int
+
+            :Example:
+            
+            >>> v1 = Vertex(1)
+            >>> v2 = Vertex(2)
+            >>> v3 = Vertex(3)
+
+            >>> e1 = Edge(v1, v2)
+            >>> e2 = Edge(v1, v3)
+            >>> e3 = Edge(v3, v2)
+
+            >>> g = Graph()
+            >>> g.insert(e1)
+            >>> g.insert(e2)
+            >>> g.insert(e3)
+
+            >>> g.get_out_degree(v1)
+            2
+            
+            >>> g.remove(e1)
+            >>> g.get_out_degree(v1)
+            1
+
+            >>> g.remove(e2)
+            >>> g.get_out_degree(v1)
+            0
 
         )delimiter");
 }
