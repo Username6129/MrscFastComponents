@@ -16,6 +16,7 @@
 namespace py = pybind11;
 using namespace pybind11::literals;
 
+
 PYBIND11_MODULE(mrscfastcom, m) {
 
     py::options options;
@@ -27,7 +28,7 @@ PYBIND11_MODULE(mrscfastcom, m) {
 
     bindVector2d(m1);
     bindVertex(m1);
-    bindEdge(m1); 
+    bindEdge(m1);
     bindGraph(m1);
     bindWorkspace(m1);
     bindAlgorithms(m2);

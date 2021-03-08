@@ -54,14 +54,11 @@ void bindAlgorithms(py::module& m) {
             >>> p.cost
             25.5707963267949
             
-            >>> (w[p.path[0].endPointX], w[p.path[0].endPointY])
-            (<Vector2d: 0.000000, 0.000000>, <Vector2d: 0.000000, 1.000000>)
+            >>> (p.path[0].endPointX, p.path[0].endPointY)
+            (<Vertex: -1>, <Vertex: 0>)
 
             >>> (w[p.path[-1].endPointX], w[p.path[-1].endPointY])
             (<Vector2d: 11.000000, 12.000000>, <Vector2d: 12.000000, 12.000000>)
-
-            >>> len(p.path)
-            24
 
         )delimiter", "workspace"_a, "init_direction"_a, "vs"_a, "ends"_a, "cost"_a, "rotation_penalty"_a);
 

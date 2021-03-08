@@ -46,6 +46,7 @@ void bindWorkspace(py::module& m) {
         .def_readonly("M", &Workspace::M)
         .def_readonly("N", &Workspace::N)
         .def_readwrite("grid_length", &Workspace::grid_length)
+        .def("__deepcopy__", [](const Workspace& self, py::dict) {return Workspace(self);})
         .def("set_mapping", py::overload_cast<const Vector2d&, const Vertex&>(&Workspace::set_mapping), R"delimiter(
 
         Set the one-to-one mapping between a coordinate and a vertex. Equivalent with w[v] = c or w[c] = v where w is the instance of Workspace.

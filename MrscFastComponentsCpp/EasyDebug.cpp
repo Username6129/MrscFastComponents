@@ -9,17 +9,23 @@
 
 int main()
 {
-
     auto g = Graph();
-    g.insert(Edge(Vertex(1), Vertex(2)));
-    cout << g.is_cycle_exist(Vertex(1)) << endl;
-    g.insert(Edge(Vertex(2), Vertex(1)));
-    g.insert(Vertex(3));
-    cout << g.is_cycle_exist(Vertex(1)) << endl;
-    cout << g.is_cycle_exist(Vertex(3)) << endl;
-    cout << g.get_edges_end_with(Vertex(1)).size() << endl;
-    g.remove(Edge(Vertex(2), Vertex(1)));
-    cout << g.get_edges_end_with(Vertex(1)).size() << endl;
+    Vertex v1 = Vertex(1);
+    Vertex v2 = Vertex(2);
+    Vertex v3 = Vertex(3);
+    Vertex v4 = Vertex(4);
+    Edge e1 = Edge(v1, v2); // 1, 2
+    Edge e2 = Edge(v2, v3); // 2, 3
+    Edge e3 = Edge(v3, v4); // 3, 4
+    Edge e4 = Edge(v4, v1); // 4, 1
+    
+    g.insert(e1);
+    g.insert(e2);
+    g.insert(e3);
+    g.insert(e4);
+
+    auto res = g.get_cycle(v1);
+
     //Workspace w = Workspace(75, 75, 1);
     //set<Vertex> vends;
     //unordered_map<Edge, double, Edge::HashFunction> cost(w.graph.edges.size());
@@ -31,30 +37,31 @@ int main()
 
     //auto init_direction = Vector2d(0, 1);
     //auto vstart = w[Vector2d(0, 0)];
-    //vends.insert(w[Vector2d(74, 74)]);
+    //vends.insert(w[Vector2d(0, 0)]);
 
     //std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
+    //auto copy_edges = w.graph.get_edges_end_with(w[Vector2d(74, 74)]);
+    //
+    //for (const auto& e : copy_edges) {
+    //    w.graph.remove(e);
+    //}
+
+    //for (const auto& e : copy_edges) {
+    //    w.graph.insert(e);
+    //}
+
+    //w.graph.insert(w[Vector2d(74, 74)]);
     //auto res = get_path_gbrs(w, init_direction, vstart, vends, cost, 1);
 
     //std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-    //for (auto v : res.path) {
-    //    cout << w[v.endPointX].to_string() << endl;
+    //if (res.path.size() > 0) {
+    //    for (auto v : res.get_vertex_sequence()) {
+    //        cout << v.to_string() << endl;
+    //    }
+    //    std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
     //}
-    //cout << w[res.path.back().endPointY].to_string() << endl;
-
-    //std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
-    //
-    //auto g = Graph();
-    //auto v1 = Vertex(1);
-    //auto v2 = Vertex(2);
-    //auto v3 = Vertex(3);
-
-    //g.insert(Edge(v1, v2));
-    //for (auto e : g.get_edges_with(v1)) {
-    //    cout << e.to_string();
-    //};
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

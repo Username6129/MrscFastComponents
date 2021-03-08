@@ -1,7 +1,7 @@
 #include "Algorithms.h"
 #include <queue>
 #include <unordered_map>
-
+#include <iostream>
 typedef int VertexId;
 
 PathInfo extract_path(const PathNodeNaive& path_node)
@@ -10,7 +10,7 @@ PathInfo extract_path(const PathNodeNaive& path_node)
 	PathInfo pinfo;
 	pinfo.cost = path_node.total_cost;
 
-	while (path_node_ptr->prev_node->prev_node != nullptr) {
+	while (path_node_ptr->prev_node != nullptr) {
 		pinfo.path.push_back(Edge(path_node_ptr->edge));
 		path_node_ptr = path_node_ptr->prev_node;
 	}
@@ -102,6 +102,9 @@ PathInfo get_path_gbrs(
 			if (edge_used.find(e_next) != edge_used.end()) continue;
 			else edge_used.insert(e_next);
 
+			//if (e_blocked.find(*e_next) != e_blocked.end()) continue;
+			//if (v_blocked.find(e_next->endPointY) != v_blocked.end()) continue;
+
 			penalty = penalty_factor *
 				GetAngleDf(z.z.find(n->edge.endPointY)->second - z.z.find(n->edge.endPointX)->second,
 					z.z.find(e_next->endPointY)->second - z.z.find(e_next->endPointX)->second);
@@ -109,6 +112,7 @@ PathInfo get_path_gbrs(
 			n_next = &(PathNodes[path_node_pointer++]);
 			reset_node(n_next, (*it).endPointY, n, penalty + n->total_cost + w.find(*e_next)->second);
 			Open.push(n_next);
+			//cout << "3" << endl;
 		}
 	}
 	return PathInfo();
@@ -166,6 +170,9 @@ PathInfo get_path_gbrs(
 			if (edge_used.find(e_next) != edge_used.end()) continue;
 			else edge_used.insert(e_next);
 
+			//if (e_blocked.find(*e_next) != e_blocked.end()) continue;
+			//if (v_blocked.find(e_next->endPointY) != v_blocked.end()) continue;
+
 			penalty = penalty_factor *
 				GetAngleDf(z.z.find(n->edge.endPointY)->second - z.z.find(n->edge.endPointX)->second,
 					z.z.find(e_next->endPointY)->second - z.z.find(e_next->endPointX)->second);
@@ -180,11 +187,14 @@ PathInfo get_path_gbrs(
 
 vector<Vertex> PathInfo::get_vertex_sequence()
 {
+	if (this->path.size() == 0) return vector<Vertex>();
+
 	vector<Vertex> res;
-	for (auto e : path) {
+	for (const auto& e : path) {
+		if (e.endPointX.id == -1) continue;
 		res.push_back(e.endPointX);
 	}
 
-	path[path.size()].endPointY;
+	res.push_back(path[path.size() - 1].endPointY);
 	return res;
 }

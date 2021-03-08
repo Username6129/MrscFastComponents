@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <deque>
 
 typedef vector<Edge> Path;
 

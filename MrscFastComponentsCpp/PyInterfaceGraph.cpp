@@ -2,6 +2,7 @@
 #include "pybind11/stl_bind.h"
 #include <set>
 
+
 void bindGraph(py::module& m) {
 
     py::class_<Graph>(m, "Graph", R"delimiter(
@@ -13,7 +14,7 @@ void bindGraph(py::module& m) {
 
     )delimiter")
         .def(py::init<>())
-        .def("insert", py::overload_cast<Edge&>(&Graph::insert),
+        .def("insert", py::overload_cast<const Edge&>(&Graph::insert),
             R"delimiter(
             This function receives Vertex or Edge as input. The provided input will be added to the corresponding set.
             
@@ -41,8 +42,8 @@ void bindGraph(py::module& m) {
 
         )delimiter", "item"_a)
 
-        .def("insert", py::overload_cast<Vertex&>(&Graph::insert))
-        .def("remove", py::overload_cast<Edge&>(&Graph::remove),
+        .def("insert", py::overload_cast<const Vertex&>(&Graph::insert))
+        .def("remove", py::overload_cast<const Edge&>(&Graph::remove),
             R"delimiter(
             This function receives Vertex or Edge as input. The provided input will be removed from the corresponding set.
             Please note that removing a vertex will also remove the edges containing the vertex.
@@ -77,8 +78,8 @@ void bindGraph(py::module& m) {
 
         )delimiter", "item"_a)
 
-        .def("remove", py::overload_cast<Vertex&>(&Graph::remove))
-        .def("exists", py::overload_cast<Edge&>(&Graph::exists),
+        .def("remove", py::overload_cast<const Vertex&>(&Graph::remove))
+        .def("exists", py::overload_cast<const Edge&>(&Graph::exists),
             R"delimiter(
             This function receives Vertex or Edge as input. 
             Check if a given input in the graph instance.
@@ -114,9 +115,9 @@ void bindGraph(py::module& m) {
 
         )delimiter")
 
-        .def("exists", py::overload_cast<Vertex&>(&Graph::exists))
-        .def_readonly("vertices", &Graph::vertices)
-        .def_readonly("edges", &Graph::edges)
+        .def("exists", py::overload_cast<const Vertex&>(&Graph::exists))
+        .def_property_readonly("vertices", &Graph::get_vertices)
+        .def_property_readonly("edges", &Graph::get_edges)
         .def("get_dt_predecessors", &Graph::get_dt_predecessors, R"delimiter(
             This function is to get the direct predecessors of the input vertex.
             
@@ -236,8 +237,41 @@ void bindGraph(py::module& m) {
             True
 
         )delimiter")
-    
-        
+
+        .def("get_cycle", &Graph::get_cycle)
+        .def("get_cycle_length", &Graph::get_cycle_length, R"delimiter(
+
+            Check if any cycle exists in the graph.
+            
+            :param root: The algorithm only searches the subgraph that connected to root.
+            :type root: Vertex
+            :return: Return the number of edges involved in the cycle.
+            :rtype: int
+
+            :Example:
+            
+            >>> v1 = Vertex(1)
+            >>> v2 = Vertex(2)
+            >>> v3 = Vertex(3)
+            >>> e1 = Edge(v1, v2)
+            >>> e2 = Edge(v2, v3)
+            >>> e3 = Edge(v3, v1)
+
+            >>> g = Graph()
+            >>> g.insert(e1)
+            >>> g.get_cycle_length(v1)
+            0
+
+            >>> g.insert(e2)
+            >>> g.get_cycle_length(v1)
+            0
+
+            >>> g.insert(e3)
+            >>> g.get_cycle_length(v1)
+            3
+
+        )delimiter", "root"_a)
+
         .def("is_cycle_exist", &Graph::is_cycle_exist, R"delimiter(
 
             Check if any cycle exists in the graph.
